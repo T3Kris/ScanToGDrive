@@ -1,0 +1,23 @@
+{
+  "name": "scan-to-gdrive",
+  "version": "1.0.0",
+  "description": "Monitors a Google Group's mailboxes for emails from a designated sender, extracts attachments, and saves them to each recipient's Google Drive.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "googleapis": "^144.0.0",
+    "winston": "^3.13.0",
+    "ws": "^8.18.0"
+  },
+  "license": "MIT"
+}

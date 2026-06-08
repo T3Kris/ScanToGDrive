@@ -1,0 +1,41 @@
+# DigitalOcean App Platform spec.
+# Create the app from this file, then set the secret env values in the
+# dashboard (GOOGLE_SERVICE_ACCOUNT_JSON, DASHBOARD_API_KEY, etc.).
+name: scan-to-gdrive
+region: nyc
+services:
+  - name: web
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 8080
+    health_check:
+      http_path: /healthz
+    github:
+      repo: T3Kris/ScanToGDrive
+      branch: main
+      deploy_on_push: true
+    run_command: node src/index.js
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: GMAIL_POLLING_INTERVAL_SECONDS
+        value: "60"
+      - key: DRIVE_FOLDER_NAME
+        value: Email Attachments
+      - key: GOOGLE_ADMIN_EMAIL
+        scope: RUN_TIME
+        type: SECRET
+      - key: MONITOR_SENDER_EMAIL
+        scope: RUN_TIME
+        type: SECRET
+      - key: MONITOR_GROUP_EMAIL
+        scope: RUN_TIME
+        type: SECRET
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        scope: RUN_TIME
+        type: SECRET
+      - key: DASHBOARD_API_KEY
+        scope: RUN_TIME
+        type: SECRET
